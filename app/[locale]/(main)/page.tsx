@@ -12,19 +12,19 @@ import {
 const specialization = [
   {
     name: "Seafood",
-    image: "/specialization/seafood.png",
+    image: "/specialization/seafood.jpeg",
   },
   {
     name: "Beverages",
-    image: "/specialization/beverages.png",
+    image: "/specialization/beverages.jpeg",
   },
   {
     name: "Breakfast",
-    image: "/specialization/breakfast.png",
+    image: "/specialization/breakfast.jpeg",
   },
   {
     name: "Pasta",
-    image: "/specialization/pasta.png",
+    image: "/specialization/pasta.jpeg",
   },
   {
     name: "Poultry",
@@ -32,11 +32,11 @@ const specialization = [
   },
   {
     name: "Vegetarian",
-    image: "/specialization/vegetarian.png",
+    image: "/specialization/vegetarian.jpeg",
   },
   {
     name: "Meats",
-    image: "/specialization/meats.png",
+    image: "/specialization/meats.jpeg",
   },
 ];
 
@@ -218,7 +218,7 @@ const Home = () => {
                     width={200}
                     height={200}
                     quality={100}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 

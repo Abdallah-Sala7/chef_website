@@ -16,7 +16,7 @@ const BookStepCard = ({
   return (
     <div className="w-full rounded-xl overflow-hidden group flex flex-col">
       {img && (
-        <div className={`w-full aspect-video max-h-44 overflow-hidden`}>
+        <div className={`w-full aspect-video max-h-52 overflow-hidden`}>
           <CustomImage
             src={img}
             alt={title}
