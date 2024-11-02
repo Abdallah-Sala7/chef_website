@@ -1,0 +1,93 @@
+"use client";
+
+import Image from "next/image";
+import NavLink from "../common/NavLink";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+import { MenuIcon, XIcon } from "lucide-react";
+
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="py-4 h-20 relative">
+      <div className="container flex items-center">
+        <div className="flex-1 md:max-w-40 flex justify-start">
+          <Image
+            src="/logo.svg"
+            alt="Chef finder"
+            width={150}
+            height={55}
+            className="w-28 h-10 md:w-32 md:h-12 object-contain"
+            quality={100}
+          />
+        </div>
+
+        <div
+          className={cn(
+            "fixed top-0 end-0 bottom-0 bg-background z-50 max-w-full w-72 translate-x-full duration-300",
+            isOpen && "translate-x-0",
+            "flex-1 md:flex-row md:static md:w-auto md:translate-x-0"
+          )}
+        >
+          <div className="w-full h-20 border-b p-4 relative md:hidden">
+            <Image
+              src="/logo.svg"
+              alt="Chef finder"
+              width={150}
+              height={55}
+              className="w-28 h-10 object-contain mx-auto"
+              quality={100}
+            />
+
+            <Button
+              size={"icon"}
+              variant={"secondary"}
+              className="absolute top-2 start-2 rounded-full w-8 h-8 [&_svg]:size-4"
+              onClick={() => setIsOpen(false)}
+            >
+              <XIcon />
+            </Button>
+          </div>
+
+          <ul className="p-4 flex flex-col md:items-center md:justify-center gap-4 md:flex-row md:p-0">
+            <li>
+              <NavLink href="/">Home</NavLink>
+            </li>
+
+            <li>
+              <NavLink href="/services">Services</NavLink>
+            </li>
+            <li>
+              <NavLink href="/contact-us">Contact us</NavLink>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex-1 md:max-w-40 flex justify-end gap-2">
+          <Button className="font-bold px-8 hidden md:block">Log in</Button>
+
+          <Button
+            size={"icon"}
+            variant={"secondary"}
+            className="bg-third md:hidden"
+            onClick={() => setIsOpen(true)}
+          >
+            <MenuIcon className="text-primary" />
+          </Button>
+        </div>
+      </div>
+
+      <div
+        className={cn(
+          "fixed inset-0 opacity-0 bg-black/50 z-40 invisible transition-opacity duration-150 md:hidden",
+          isOpen && "visible opacity-100"
+        )}
+        onClick={() => setIsOpen(false)}
+      />
+    </nav>
+  );
+};
+
+export default Header;

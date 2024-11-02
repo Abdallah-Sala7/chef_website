@@ -1,0 +1,31 @@
+{
+  "common": {
+    "new": "New",
+    "all": "All",
+    "offers": "Offers",
+    "search-placeholder": "Write to search",
+    "sar": "SAR",
+    "add-to-cart": "Add to cart"
+  },
+
+  "home": {
+    "home-main-title": "Explore all product",
+    "all": "All"
+  },
+
+  "cart": {
+    "empty-cart": "Cart is empty",
+    "go-shopping": "Go shopping",
+    "refresh": "Refresh",
+    "booking-time": "Booking time",
+    "client": "Client",
+    "phone": "Phone",
+    "full-name": "Full name",
+    "notes": "Notes",
+    "total": "Total",
+    "client-details": "Client details",
+    "complete-reservation": "Complete reservation",
+    "client-name": "Client name",
+    "sar": "SAR"
+  }
+}
