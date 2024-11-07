@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
+import { Link } from "@/navigation";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +67,9 @@ const Header = () => {
         </div>
 
         <div className="flex-1 md:max-w-40 flex justify-end gap-2">
-          <Button className="font-bold px-8 hidden md:block">Log in</Button>
+          <Link href={"/login"} className="hidden md:block">
+            <Button className="font-bold px-8">Log in</Button>
+          </Link>
 
           <Button
             size={"icon"}
