@@ -1,9 +1,12 @@
 "use client";
 import Input from "./Input";
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
-const PasswordInput = () => {
+const PasswordInput = ({
+  className,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -12,6 +15,7 @@ const PasswordInput = () => {
         type={showPassword ? "text" : "password"}
         required
         className="pe-11"
+        {...props}
       />
 
       <button
@@ -19,11 +23,7 @@ const PasswordInput = () => {
         onClick={() => setShowPassword(!showPassword)}
         className="absolute top-1/2 -translate-y-1/2 right-4"
       >
-        {showPassword ? (
-          <EyeIcon size={20}/>
-        ) : (
-          <EyeOffIcon size={20}/>
-        )}
+        {showPassword ? <EyeIcon size={20} /> : <EyeOffIcon size={20} />}
       </button>
     </div>
   );

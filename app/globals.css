@@ -79,6 +79,22 @@ body {
 
 @layer utilities {
   .section-style {
-    @apply py-6;
+    @apply py-10;
+  }
+
+  .title {
+    @apply text-xl md:text-2xl font-semibold
+  }
+
+  .title-sm {
+    @apply text-lg md:text-xl font-semibold
+  }
+  
+  .title-xs {
+    @apply text-xs md:text-base font-semibold
+  }
+
+  .desc {
+    @apply text-sm md:text-base text-gray-500
   }
 }

@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       container: {
         center: true,
-        padding: "2rem",
+        padding: "1rem",
       },
       colors: {
         background: "hsl(var(--background))",

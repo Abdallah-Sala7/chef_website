@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const AppBar = () => {
   const router = useRouter();
   return (
-    <nav className="h-20 flex items-center border-b">
+    <nav className="h-[75px] sticky top-0 bg-background z-50 flex items-center border-b">
       <div className="container flex justify-between items-center">
         <Link href="/">
           <Image
@@ -16,16 +16,16 @@ const AppBar = () => {
             alt="Chef finder"
             width={150}
             height={55}
-            className="w-28 h-10 md:w-32 md:h-12 object-contain"
+            className="w-28 h-10 md:w-32 object-contain"
             quality={100}
           />
         </Link>
 
         <button
-          className="w-10 h-10 rounded-full bg-muted flex justify-center items-center"
+          className="w-9 h-9 rounded-full bg-gray-50 hover:bg-gray-100 flex justify-center items-center"
           onClick={() => router.back()}
         >
-          <XIcon className="w-6 h-6 text-primary" />
+          <XIcon className="w-5 h-5 text-primary" />
         </button>
       </div>
     </nav>

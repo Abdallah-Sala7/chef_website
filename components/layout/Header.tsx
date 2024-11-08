@@ -12,7 +12,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="py-4 h-20 relative">
+    <nav className="py-4 h-[75px] sticky top-0 bg-background z-50 border-b">
       <div className="container flex items-center">
         <div className="flex-1 md:max-w-40 flex justify-start">
           <Image

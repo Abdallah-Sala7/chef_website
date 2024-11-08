@@ -2,6 +2,7 @@ import BookStepCard from "@/components/common/BookStepCard";
 import CustomImage from "@/components/common/Image";
 import ImpactCard from "@/components/common/ImpactCard";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/navigation";
 import {
   ChefHatIcon,
   ConciergeBellIcon,
@@ -117,7 +118,7 @@ const Home = () => {
           />
         </div>
 
-        <div className="container h-[calc(100vh-80px)] flex justify-center items-center">
+        <div className="container h-[calc(100vh-75px)] flex justify-center items-center">
           <div className="py-6 px-4 rounded-2xl max-w-xl bg-muted/50 flex flex-col justify-center items-center gap-4 md:gap-6 md:py-10 md:px-10">
             <h1 className="text-center text-2xl md:text-3xl font-semibold">
               Welcome to Chef finder
@@ -168,7 +169,9 @@ const Home = () => {
               </span>
             </div>
 
-            <Button className="px-6">Book Now</Button>
+            <Link href={"/new-order"}>
+              <Button className="px-6">Book Now</Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -176,7 +179,7 @@ const Home = () => {
       <section className="bg-muted py-12 mb-6">
         <div className="container flex justify-between items-center gap-6 flex-wrap">
           <div className="w-full md:w-auto md:flex-1">
-            <h2 className="text-xl md:text-2xl font-semibold mb-4">About</h2>
+            <h2 className="title mb-4">About</h2>
 
             <p className="text-muted-foreground">
               At chef finder we provide you with chefs of your own choice, for
@@ -201,9 +204,7 @@ const Home = () => {
 
       <section className="section-style">
         <div className="container">
-          <h2 className="text-xl md:text-2xl font-semibold mb-12 text-center">
-            Specialization
-          </h2>
+          <h2 className="title mb-12 text-center">Specialization</h2>
 
           <div className="grid grid-cols-3 gap-8 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-7 md:gap-12">
             {specialization.map((item) => (
@@ -233,9 +234,7 @@ const Home = () => {
 
       <section className="bg-muted py-12 my-6">
         <div className="container">
-          <h2 className="text-xl md:text-2xl font-semibold mb-12 text-center">
-            How do you order a chef?
-          </h2>
+          <h2 className="title mb-12 text-center">How do you order a chef?</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {howToOrder.map((item, i) => (
@@ -253,9 +252,7 @@ const Home = () => {
 
       <section className="section-style">
         <div className="container">
-          <h2 className="text-xl md:text-2xl font-semibold mb-12 text-center">
-            The Impact We've Made
-          </h2>
+          <h2 className="title mb-12 text-center">The Impact We've Made</h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {impact.map((item, i) => (
