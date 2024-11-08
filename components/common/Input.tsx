@@ -9,7 +9,7 @@ const Input = ({
     <input
       type="text"
       className={cn(
-        "w-full bg-background px-4 py-3 border h-12 !outline-none rounded-xl focus:ring-0 focus:border-gray-400",
+        "w-full bg-background/70 px-4 py-3 border h-12 text-sm !outline-none rounded-xl focus:ring-0 focus:border-gray-400 focus:bg-background/100",
         className
       )}
       {...props}

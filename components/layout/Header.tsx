@@ -2,27 +2,37 @@
 
 import Image from "next/image";
 import NavLink from "../common/NavLink";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 import { Link } from "@/navigation";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  }, [pathname]);
 
   return (
     <nav className="py-4 h-[75px] sticky top-0 bg-background z-50 border-b">
       <div className="container flex items-center">
         <div className="flex-1 md:max-w-40 flex justify-start">
-          <Image
-            src="/logo.svg"
-            alt="Chef finder"
-            width={150}
-            height={55}
-            className="w-28 h-10 md:w-32 md:h-12 object-contain"
-            quality={100}
-          />
+          <Link href={"/"}>
+            <Image
+              src="/logo.svg"
+              alt="Chef finder"
+              width={200}
+              height={55}
+              className="w-28 h-10 md:w-32 object-contain"
+              quality={100}
+            />
+          </Link>
         </div>
 
         <div
@@ -45,7 +55,7 @@ const Header = () => {
             <Button
               size={"icon"}
               variant={"secondary"}
-              className="absolute top-2 start-2 rounded-full w-8 h-8 [&_svg]:size-4"
+              className="absolute top-2 start-2 rounded-full w-8 h-8 bg-gray-50 hover:bg-gray-100 [&_svg]:size-4"
               onClick={() => setIsOpen(false)}
             >
               <XIcon />
@@ -74,7 +84,7 @@ const Header = () => {
           <Button
             size={"icon"}
             variant={"secondary"}
-            className="bg-third md:hidden"
+            className="bg-gray-50 hover:bg-gray-100 md:hidden"
             onClick={() => setIsOpen(true)}
           >
             <MenuIcon className="text-primary" />

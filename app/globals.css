@@ -86,12 +86,20 @@ body {
     @apply text-xl md:text-2xl font-semibold
   }
 
-  .title-sm {
+  .title-md {
     @apply text-lg md:text-xl font-semibold
   }
-  
+
+  .title-base{
+    @apply text-base md:text-lg font-semibold
+  }
+
+  .title-sm {
+    @apply text-sm md:text-base font-semibold
+  }
+
   .title-xs {
-    @apply text-xs md:text-base font-semibold
+    @apply text-xs md:text-sm font-semibold
   }
 
   .desc {

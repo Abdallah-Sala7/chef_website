@@ -25,7 +25,7 @@ const NavLink = ({
         after:transition-all after:duration-300 after:top-full after:hidden md:after:block
         ${
           isActive
-            ? "bg-primary text-white w-full rounded-md md:bg-transparent md:text-primary md:after:w-full"
+            ? "bg-primary !text-white w-full rounded-md md:bg-transparent md:text-primary md:after:w-full"
             : "text-accent-foreground after:w-0 hover:after:w-full"
         }
       `}

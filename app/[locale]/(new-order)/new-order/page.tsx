@@ -171,6 +171,11 @@ const tabsContent: ITabsContent = {
       title:
         "Describe Your Event to Help Our Chefs Personalize Your Experience",
       desc: "Provide details about the occasion, atmosphere, preferred menu, and any other important information so they can tailor their service to your needs.",
+      textStyle: "text-primary",
+      content: [],
+    },
+    {
+      title: "",
       content: [
         {
           type: "input",
@@ -192,6 +197,11 @@ const tabsContent: ITabsContent = {
     {
       title: "Final Step!",
       desc: "You're done! Now, just enter your contact information, and we'll send you personalized menu suggestions in less than 20 minutes for free.",
+      textStyle: "text-center max-w-4xl mx-auto",
+      content: [],
+    },
+    {
+      title: "",
       content: [
         {
           type: "input",
@@ -217,6 +227,12 @@ const tabsContent: ITabsContent = {
           label: "Phone",
           value: "",
         },
+        {
+          type: "input",
+          name: "location",
+          label: "Location",
+          value: "",
+        },
       ],
     },
   ],
@@ -225,7 +241,7 @@ const tabsContent: ITabsContent = {
 const OrderPage = () => {
   return (
     <section>
-      <div className="w-full">
+      <div className="w-full bg-gray-50">
         <Image
           src="/order_bg.png"
           alt="order image"

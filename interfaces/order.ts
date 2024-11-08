@@ -1,6 +1,7 @@
 type contentItemType = {
   title: string;
   desc?: string;
+  textStyle?: string;
   content: {
     type: string;
     name: string;

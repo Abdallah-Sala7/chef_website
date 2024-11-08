@@ -1,6 +1,7 @@
 import BookStepCard from "@/components/common/BookStepCard";
 import CustomImage from "@/components/common/Image";
 import ImpactCard from "@/components/common/ImpactCard";
+import SpecializeCard from "@/components/common/SpecializationCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/navigation";
 import {
@@ -29,7 +30,7 @@ const specialization = [
   },
   {
     name: "Poultry",
-    image: "/specialization/poultry.png",
+    image: "/specialization/poultry.jpeg",
   },
   {
     name: "Vegetarian",
@@ -178,10 +179,10 @@ const Home = () => {
 
       <section className="bg-muted py-12 mb-6">
         <div className="container flex justify-between items-center gap-6 flex-wrap">
-          <div className="w-full md:w-auto md:flex-1">
-            <h2 className="title mb-4">About</h2>
+          <div className="w-full max-w-2xl md:w-auto md:flex-1">
+            <h2 className="title mb-2">About</h2>
 
-            <p className="text-muted-foreground">
+            <p className="desc">
               At chef finder we provide you with chefs of your own choice, for
               home dinning,parties,birthdays. At chef finder you can as well
               find a bartender and a waiter for your special occasion. Welcome
@@ -208,25 +209,7 @@ const Home = () => {
 
           <div className="grid grid-cols-3 gap-8 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-7 md:gap-12">
             {specialization.map((item) => (
-              <div
-                key={item.name}
-                className="flex flex-col justify-center items-center gap-4 group"
-              >
-                <div className="w-full aspect-square overflow-hidden rounded-full">
-                  <CustomImage
-                    src={item.image}
-                    alt={item.name}
-                    width={200}
-                    height={200}
-                    quality={100}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-
-                <h3 className="font-semibold text-center transition-colors duration-300 md:text-lg group-hover:text-primary">
-                  {item.name}
-                </h3>
-              </div>
+              <SpecializeCard key={item.name} {...item} />
             ))}
           </div>
         </div>

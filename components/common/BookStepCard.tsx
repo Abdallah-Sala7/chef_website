@@ -32,19 +32,11 @@ const BookStepCard = ({
           !img ? "justify-center" : ""
         }`}
       >
-        <h3 className="text-lg font-semibold text-white lg:text-2xl">
-          {title}
-        </h3>
+        <h3 className="title-md text-white">{title}</h3>
 
-        <p className="text-primary-foreground md:text-lg md:font-medium">
-          {description}
-        </p>
+        <p className="text-primary-foreground font-medium">{description}</p>
 
-        {info && (
-          <p className="text-primary-foreground md:text-lg md:font-medium">
-            {info}
-          </p>
-        )}
+        {info && <p className="text-primary-foreground font-medium">{info}</p>}
 
         {!img && (
           <Button

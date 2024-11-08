@@ -14,12 +14,12 @@ const Footer = () => {
                   alt="Chef finder"
                   width={150}
                   height={55}
-                  className="w-32 h-12 object-contain"
+                  className="w-32 h-11 object-contain"
                   quality={100}
                 />
               </Link>
 
-              <p className="text-primary-foreground">
+              <p className="desc !text-primary-foreground">
                 A Gastronomy platform for those who prefer fine dinning at home,
                 an easy access to recipes from all around the world with our
                 talented chefs
@@ -109,13 +109,13 @@ const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 text-white">Links</h3>
+              <h2 className="title mb-2 text-white">Links</h2>
 
-              <ul className="flex flex-col gap-1 md:gap-1.5">
+              <ul className="flex flex-col gap-1">
                 <li>
                   <Link
                     href="/about"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     About us
                   </Link>
@@ -124,7 +124,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/blog"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Blog
                   </Link>
@@ -133,7 +133,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/careers"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Careers
                   </Link>
@@ -142,7 +142,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/job"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Job
                   </Link>
@@ -151,7 +151,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/register"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Chef Register
                   </Link>
@@ -160,13 +160,13 @@ const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 text-white">Support</h3>
+              <h2 className="title mb-2 text-white">Support</h2>
 
-              <ul className="flex flex-col gap-1 md:gap-1.5">
+              <ul className="flex flex-col gap-1">
                 <li>
                   <Link
                     href="/contact"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Contact us
                   </Link>
@@ -175,7 +175,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/chat"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Online chat
                   </Link>
@@ -186,7 +186,7 @@ const Footer = () => {
                     href="https://wa.me/919876543210"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Whatsapp
                   </a>
@@ -197,7 +197,7 @@ const Footer = () => {
                     href="https://t.me/Example"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Telegram
                   </a>
@@ -208,7 +208,7 @@ const Footer = () => {
                     href="https://www.instagram.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Instagram
                   </a>
@@ -217,13 +217,13 @@ const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 text-white">FAQ</h3>
+              <h2 className="title mb-2 text-white">FAQ</h2>
 
-              <ul className="flex flex-col gap-1 md:gap-1.5">
+              <ul className="flex flex-col gap-1">
                 <li>
                   <Link
                     href="/account"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Account
                   </Link>
@@ -232,7 +232,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Manage
                   </Link>
@@ -241,7 +241,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/order"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Order
                   </Link>
@@ -250,7 +250,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/payment"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Payment
                   </Link>
@@ -259,7 +259,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/return"
-                    className="md:text-lg font-medium text-primary-foreground hover:text-secondary"
+                    className="title-sm text-primary-foreground !font-medium hover:text-secondary"
                   >
                     Return
                   </Link>
@@ -273,8 +273,9 @@ const Footer = () => {
       <div className="border-t border-muted/10 py-4">
         <div className="container">
           <p className="text-sm text-primary-foreground text-center">
-            © {new Date().getFullYear()} <span className="font-semibold text-secondary">Chef Finder</span>. All rights
-            reserved.
+            © {new Date().getFullYear()}{" "}
+            <span className="font-semibold text-secondary">Chef Finder</span>.
+            All rights reserved.
           </p>
         </div>
       </div>

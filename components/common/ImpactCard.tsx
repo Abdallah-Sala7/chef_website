@@ -15,7 +15,7 @@ const ImpactCard = ({
         <h2 className="text-2xl font-bold">{value}</h2>
       </div>
 
-      <h3 className="text-center text-xl font-semibold">{title}</h3>
+      <h3 className="text-center title-base">{title}</h3>
     </div>
   );
 };

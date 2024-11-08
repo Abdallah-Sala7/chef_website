@@ -41,112 +41,117 @@ const Form = ({ tabsContent }: { tabsContent: ITabsContent }) => {
     router.push(`?${params.toString()}`, { scroll: false });
   }, []);
 
-  console.log(defValues);
-
   return (
     <form action={formAction}>
       <div className="space-y-6 max-w-5xl mx-auto" key={tabs}>
         {content.map((item) => (
           <div className="space-y-3" key={JSON.stringify(item)}>
-            <div className="space-y-1">
-              <h2 className="title-sm">{item.title}</h2>
+            <div className={cn("space-y-1", item.textStyle && item.textStyle)}>
+              <h2 className="title-md">{item.title}</h2>
 
-              {item.desc && <p className="desc">{item.desc}</p>}
+              {item.desc && (
+                <p className="desc !text-inherit opacity-70">{item.desc}</p>
+              )}
             </div>
 
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              {item.content.map((item, index) => (
-                <Fragment key={index}>
-                  {item.type === "radio" ? (
-                    <RadioInput
-                      name={item.name}
-                      value={item.value}
-                      label={item.label}
-                      defaultChecked={defValues[item.name] === item.value}
-                    />
-                  ) : item.type === "date" ? (
-                    <div className="col-span-full">
-                      <DatePicker
-                        value={defValues[item.name]}
+            {item.content.length > 0 && (
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                {item.content.map((item, index) => (
+                  <Fragment key={index}>
+                    {item.type === "radio" ? (
+                      <RadioInput
                         name={item.name}
-                        className={
-                          "w-full h-auto py-3 font-semibold border-[3px] rounded-xl border-gray-200 text-sm"
-                        }
+                        value={item.value}
+                        label={item.label}
+                        defaultChecked={defValues[item.name] === item.value}
                       />
-                    </div>
-                  ) : item.type === "textarea" ? (
-                    <div className="col-span-full">
-                      <label className="title-xs mb-2 block">
-                        {item.label}
-                      </label>
+                    ) : item.type === "date" ? (
+                      <div className="col-span-full">
+                        <DatePicker
+                          value={defValues[item.name]}
+                          name={item.name}
+                          className={
+                            "w-full h-auto py-3 font-semibold border-[3px] rounded-xl border-gray-200 text-sm"
+                          }
+                        />
+                      </div>
+                    ) : item.type === "textarea" ? (
+                      <div className="col-span-full">
+                        <label className="title-sm mb-2 block">
+                          {item.label}
+                        </label>
 
-                      <Textarea
-                        name={item.name}
-                        defaultValue={defValues[item.name]}
-                      />
-                    </div>
-                  ) : item.type === "input" ? (
-                    <div className="col-span-full">
-                      <label className="title-xs mb-2 block">
-                        {item.label}
-                      </label>
+                        <Textarea
+                          name={item.name}
+                          defaultValue={defValues[item.name]}
+                        />
+                      </div>
+                    ) : item.type === "input" ? (
+                      <div className="col-span-full">
+                        <label className="title-sm mb-2 block">
+                          {item.label}
+                        </label>
 
-                      <Input
-                        name={item.name}
-                        defaultValue={defValues[item.name]}
-                      />
-                    </div>
-                  ) : item.type === "email" ? (
-                    <div className="col-span-full">
-                      <label className="title-xs mb-2 block">
-                        {item.label}
-                      </label>
+                        <Input
+                          name={item.name}
+                          required
+                          defaultValue={defValues[item.name]}
+                        />
+                      </div>
+                    ) : item.type === "email" ? (
+                      <div className="col-span-full">
+                        <label className="title-sm mb-2 block">
+                          {item.label}
+                        </label>
 
-                      <Input
-                        type="email"
-                        name={item.name}
-                        defaultValue={defValues[item.name]}
-                      />
-                    </div>
-                  ) : item.type === "password" ? (
-                    <div className="col-span-full">
-                      <label className="title-xs mb-2 block">
-                        {item.label}
-                      </label>
+                        <Input
+                          type="email"
+                          name={item.name}
+                          required
+                          defaultValue={defValues[item.name]}
+                        />
+                      </div>
+                    ) : item.type === "password" ? (
+                      <div className="col-span-full">
+                        <label className="title-sm mb-2 block">
+                          {item.label}
+                        </label>
 
-                      <PasswordInput
-                        name={item.name}
-                        defaultValue={defValues[item.name]}
-                      />
-                    </div>
-                  ) : item.type === "phone" ? (
-                    <div className="col-span-full">
-                      <label className="title-xs mb-2 block">
-                        {item.label}
-                      </label>
-                      <Input
-                        type="tel"
-                        name={item.name}
-                        defaultValue={defValues[item.name]}
-                      />
-                    </div>
-                  ) : item.type === "location" ? (
-                    <div className="col-span-full">
-                      <label className="title-xs mb-2 block">
-                        {item.label}
-                      </label>
-                      <Input
-                        type="text"
-                        name={item.name}
-                        defaultValue={defValues[item.name]}
-                      />
-                    </div>
-                  ) : (
-                    <> </>
-                  )}
-                </Fragment>
-              ))}
-            </div>
+                        <PasswordInput
+                          name={item.name}
+                          defaultValue={defValues[item.name]}
+                        />
+                      </div>
+                    ) : item.type === "phone" ? (
+                      <div className="col-span-full">
+                        <label className="title-sm mb-2 block">
+                          {item.label}
+                        </label>
+                        <Input
+                          type="tel"
+                          name={item.name}
+                          required
+                          defaultValue={defValues[item.name]}
+                        />
+                      </div>
+                    ) : item.type === "location" ? (
+                      <div className="col-span-full">
+                        <label className="title-sm mb-2 block">
+                          {item.label}
+                        </label>
+                        <Input
+                          type="text"
+                          name={item.name}
+                          defaultValue={defValues[item.name]}
+                        />
+                      </div>
+                    ) : (
+                      <> </>
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+            )}
           </div>
         ))}
 
@@ -199,6 +204,7 @@ const RadioInput = ({
           type="radio"
           name={name}
           value={value}
+          required
           className="hidden"
           defaultChecked={defaultChecked}
         />
