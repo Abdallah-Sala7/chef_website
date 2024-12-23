@@ -105,4 +105,11 @@ body {
   .desc {
     @apply text-sm md:text-base text-gray-500
   }
+
+  .form-error{
+    @apply text-sm text-red-500
+  }  
+  .form-label{
+    @apply inline-block text-sm font-medium text-gray-700
+  }
 }

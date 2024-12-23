@@ -18,11 +18,13 @@ export function DatePicker({
   value,
   className,
   minDate,
+  onChange,
 }: {
   name: string;
   value?: string;
   className?: string;
   minDate?: Date;
+  onChange?: (value: string) => void;
 }) {
   const [date, setDate] = React.useState<Date>();
 
@@ -58,7 +60,10 @@ export function DatePicker({
         <Calendar
           mode="single"
           selected={date}
-          onSelect={setDate}
+          onSelect={(date) => {
+            setDate(date);
+            onChange && onChange((date && format(date, "yyyy-MM-dd")) || "");
+          }}
           initialFocus
           minDate={minDate}
         />

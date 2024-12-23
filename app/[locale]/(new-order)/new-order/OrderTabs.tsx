@@ -23,7 +23,6 @@ const OrderTabs = ({ tabsLength }: { tabsLength: number }) => {
             index <= Number(tab) ? "bg-primary" : "bg-gray-200"
           }`}
           onClick={() => handleTabClick(String(index))}
-          aria-current={index === Number(tab) ? "page" : undefined}
           disabled={index > Number(tab)}
         />
       ))}

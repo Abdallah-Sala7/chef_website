@@ -8,10 +8,14 @@ import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 import { Link } from "@/navigation";
 import { usePathname } from "next/navigation";
+import cookieClient from "js-cookie";
+import { SESSION_NAME } from "@/constant";
 
 const Header = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const isLoggedIn = cookieClient.get(SESSION_NAME);
 
   useEffect(() => {
     if (isOpen) {
@@ -70,6 +74,13 @@ const Header = () => {
             <li>
               <NavLink href="/services">Services</NavLink>
             </li>
+
+            {isLoggedIn && (
+              <li>
+                <NavLink href="/orders">Orders</NavLink>
+              </li>
+            )}
+
             <li>
               <NavLink href="/contact-us">Contact us</NavLink>
             </li>
@@ -77,9 +88,11 @@ const Header = () => {
         </div>
 
         <div className="flex-1 md:max-w-40 flex justify-end gap-2">
-          <Link href={"/login"} className="hidden md:block">
-            <Button className="font-bold px-8">Log in</Button>
-          </Link>
+          {!isLoggedIn && (
+            <Link href={"/login"} className="hidden md:block">
+              <Button className="font-bold px-8">Log in</Button>
+            </Link>
+          )}
 
           <Button
             size={"icon"}

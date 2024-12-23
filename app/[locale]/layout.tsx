@@ -1,3 +1,4 @@
+import "react-toastify/dist/ReactToastify.css";
 import "../globals.css";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
@@ -5,6 +6,8 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
+import { QueryProvider } from "@/providers/query";
 
 export const metadata: Metadata = {
   title: "Chef finder",
@@ -35,8 +38,14 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </NextIntlClientProvider>
+        <ToastContainer
+          style={{
+            right: "0",
+          }}
+          theme="colored"
+        />
       </body>
     </html>
   );
