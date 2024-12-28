@@ -13,31 +13,31 @@ import { Loader2Icon } from "lucide-react";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const { values, isSubmitting, handleChange, handleSubmit, setFieldValue } =
-    useFormik({
-      initialValues: {
-        email: "",
-        password: "",
-        guard_name: "user",
-      },
+  const { values, isSubmitting, handleChange, handleSubmit } = useFormik({
+    initialValues: {
+      login: "",
+      password: "",
+      guard_name: "user",
+    },
 
-      onSubmit: async (values) => {
-        const res = (await postData({
-          endpoint: "/user/auth/login",
-          config: {
-            body: values,
-          },
-        })) as any;
+    onSubmit: async (values) => {
+      const res = (await postData({
+        endpoint: "/user/auth/login",
+        config: {
+          body: values,
+        },
+      })) as any;
 
-        if (res.status === "fail") {
-          toast.success(toast.error(res.message || "Invalid credentials"));
-        } else if (res.status === "success") {
-          const token = res?.data?.token || "";
-          toast.success("Logged in successfully");
-          loginAction(token);
-        }
-      },
-    });
+      if (res.status === "fail") {
+        toast.error(res.message || "Invalid credentials");
+      } else if (res.status === "success") {
+        const token = res?.data?.token || "";
+        toast.success("Logged in successfully");
+        await loginAction(token);
+        window.location.href = "/";
+      }
+    },
+  });
 
   return (
     <Card className="space-y-6 px-8 py-12">
@@ -72,15 +72,16 @@ const LoginPage = () => {
         <div className="space-y-6">
           <div className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium">
+              <label htmlFor="login" className="block text-sm font-medium">
                 Email or mobile phone number
               </label>
 
               <Input
                 type="text"
-                id="email"
-                name="email"
+                id="login"
+                name="login"
                 required
+                value={values.login}
                 onChange={handleChange}
               />
             </div>
@@ -94,6 +95,7 @@ const LoginPage = () => {
                 id="password"
                 name="password"
                 required
+                value={values.password}
                 onChange={handleChange}
               />
 

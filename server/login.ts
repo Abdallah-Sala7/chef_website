@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 
 import {
-  DEFAULT_LOGIN_REDIRECT,
+  // DEFAULT_LOGIN_REDIRECT,
   EMAIL_ADDRESS,
   SESSION_NAME,
 } from "@/constant";
@@ -11,8 +11,8 @@ import { decodeSession } from "@/utils/session";
 
 export const loginAction = async (
   session: string,
-  remeber: boolean = false,
-  callbackUrl?: string | null
+  remeber: boolean = false
+  // callbackUrl?: string | null
 ) => {
   const { exp } = decodeSession(session);
 
@@ -33,7 +33,7 @@ export const loginAction = async (
   }
 
   // Redirect to the callback URL if provided, otherwise to the default redirect
-  const redirectUrl = callbackUrl || DEFAULT_LOGIN_REDIRECT;
-  window.location.href = redirectUrl;
+  // const redirectUrl = callbackUrl || DEFAULT_LOGIN_REDIRECT;
+
   // redirect(redirectUrl);
 };

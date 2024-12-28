@@ -10,6 +10,7 @@ import { Link } from "@/navigation";
 import { usePathname } from "next/navigation";
 import cookieClient from "js-cookie";
 import { SESSION_NAME } from "@/constant";
+import { logoutAction } from "@/server/logout";
 
 const Header = () => {
   const pathname = usePathname();
@@ -88,10 +89,19 @@ const Header = () => {
         </div>
 
         <div className="flex-1 md:max-w-40 flex justify-end gap-2">
-          {!isLoggedIn && (
+          {!isLoggedIn ? (
             <Link href={"/login"} className="hidden md:block">
               <Button className="font-bold px-8">Log in</Button>
             </Link>
+          ) : (
+            <Button
+              className="font-bold px-8"
+              onClick={() => {
+                logoutAction();
+              }}
+            >
+              Log out
+            </Button>
           )}
 
           <Button

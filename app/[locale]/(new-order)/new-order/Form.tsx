@@ -6,105 +6,141 @@ import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/DatePicker";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import cookieClient from "js-cookie";
 import { SESSION_NAME } from "@/constant";
 import { createHeaders } from "@/utils/createHeaders";
 import { useGetData, usePostData } from "@/hooks/useFetch";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
+import RegisterForm from "../../(auth)/register/Form";
+import { loginAction } from "@/server/login";
+
+const age = ["children", "adults", "teens"];
+const meals = ["breakfast", "lunch", "dinner"];
+const addition_services = [
+  { value: 0, label: "waiter" },
+  { value: 1, label: "bartender" },
+  { value: 2, label: "other" },
+];
 
 const Form = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const tabs = searchParams.get("tab") || "0";
-  const params = new URLSearchParams(searchParams.toString());
+
   const isLoggedIn = cookieClient.get(SESSION_NAME);
-
-  const [errors, setErrors] = useState<any>({});
-
   const { mutateAsync } = usePostData({ endpoint: "/user/orders" });
+
+  const maxTabs = isLoggedIn ? 5 : 6;
+  const [tabs, setTabs] = useState(0);
+  const [errors, setErrors] = useState<any>({});
 
   const { values, isSubmitting, handleChange, handleSubmit, setFieldValue } =
     useFormik({
       initialValues: {
         service_id: "",
         package_id: "",
-        addition_service: "",
+        addition_service: "1",
         day: "",
-        state: "open",
+        state: "1",
       },
 
       onSubmit: async (values) => {
-        if (Number(tabs) < (isLoggedIn ? 4 : 5)) {
-          params.set("tab", String(Number(tabs) + 1));
-          router.push(`?${params.toString()}`, { scroll: false });
+        if (tabs < maxTabs - 1) {
+          setTabs(tabs + 1);
           return;
         }
 
-        const res = await mutateAsync(values);
+        const res = (await mutateAsync(values)) as any;
 
         if (res.status === "fail") {
           setErrors(res.data);
           toast.error(res.message || "An error occurred while creating order");
         } else if (res.status === "success") {
-          toast.success("Order created successfully");
-          router.push(`/orders`);
+          console.log(res);
+          if (res?.data?.token) {
+            loginAction(res?.data?.token);
+          } else {
+            toast.success("Order created successfully");
+            router.push(`/orders`);
+          }
         }
       },
     });
 
-  useEffect(() => {
-    params.set("tab", "0");
-    router.push(`?${params.toString()}`, { scroll: false });
-  }, []);
-
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="space-y-6 max-w-5xl mx-auto" key={tabs}>
-        {tabs === "0" ? (
-          <StepOne defValues={values} handleChange={handleChange} />
-        ) : tabs === "1" ? (
-          <StepTow defValues={values} handleChange={handleChange} />
-        ) : tabs === "2" ? (
-          <StepTree
-            defValues={values}
-            handleChange={handleChange}
-            setFieldValue={setFieldValue}
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        {Array.from({ length: maxTabs }).map((_, index) => (
+          <button
+            key={index}
+            className={`flex-1 h-1 rounded-full ${
+              index <= tabs ? "bg-primary" : "bg-gray-200"
+            }`}
+            onClick={() => setTabs(index)}
+            disabled={index > tabs}
           />
-        ) : tabs === "3" ? (
-          <StepFour defValues={values} handleChange={handleChange} />
-        ) : tabs === "4" ? (
-          <StepFive defValues={values} handleChange={handleChange} />
-        ) : tabs === "5" ? (
-          "Create Account Form Content"
-        ) : null}
-        <div className="flex justify-between items-center pt-4">
-          <Button
-            type="button"
-            variant={"outline"}
-            onClick={() => {
-              params.set("tab", String(Number(tabs) - 1));
-              router.push(`?${params.toString()}`, { scroll: false });
-            }}
-            className={tabs === "0" ? "invisible" : "font-semibold"}
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>BACK</span>
-          </Button>
-
-          <Button
-            type="submit"
-            className="font-semibold"
-            disabled={isSubmitting}
-          >
-            <span>NEXT</span>
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </div>
+        ))}
       </div>
-    </form>
+
+      <form onSubmit={handleSubmit}>
+        <div className="space-y-6 max-w-5xl mx-auto" key={tabs}>
+          {tabs === 0 ? (
+            <StepOne
+              defValues={values}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
+            />
+          ) : tabs === 1 ? (
+            <StepTow defValues={values} handleChange={handleChange} />
+          ) : tabs === 2 ? (
+            <StepTree
+              defValues={values}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
+            />
+          ) : tabs === 3 ? (
+            <StepFour defValues={values} handleChange={handleChange} />
+          ) : tabs === 4 ? (
+            <StepFive defValues={values} handleChange={handleChange} />
+          ) : tabs === 5 ? (
+            <RegisterForm
+              errors={errors}
+              values={values}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
+            />
+          ) : null}
+
+          <div className="flex justify-between items-center pt-4">
+            <Button
+              type="button"
+              variant={"outline"}
+              onClick={() => setTabs(tabs - 1)}
+              className={tabs === 0 ? "invisible" : "font-semibold"}
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>BACK</span>
+            </Button>
+
+            <Button
+              type="submit"
+              className="font-semibold"
+              disabled={isSubmitting}
+            >
+              {tabs === maxTabs - 1 ? (
+                "CREATE ORDER"
+              ) : (
+                <>
+                  <span>NEXT</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
@@ -116,12 +152,18 @@ const RadioInput = ({
   label,
   defaultChecked,
   onChange,
+  checked,
+  type = "radio",
+  required = true,
 }: {
   name: string;
-  value: string;
+  value: string | number;
   label: string;
-  defaultChecked: boolean;
+  defaultChecked?: boolean;
   onChange: any;
+  checked?: boolean;
+  type?: string;
+  required?: boolean;
 }) => {
   return (
     <div className="group">
@@ -132,12 +174,13 @@ const RadioInput = ({
         )}
       >
         <input
-          type="radio"
+          type={type}
           name={name}
           value={value}
-          required
+          required={required}
           className="hidden"
           defaultChecked={defaultChecked}
+          checked={checked}
           onChange={onChange}
         />
         {label}
@@ -146,20 +189,19 @@ const RadioInput = ({
   );
 };
 
-const age = ["children", "adults", "teens"];
-const meals = ["breakfast", "lunch", "dinner"];
-
 const StepOne = ({
   defValues,
   handleChange,
+  setFieldValue,
 }: {
   defValues: any;
   handleChange: any;
+  setFieldValue: any;
 }) => {
   const headers = createHeaders();
 
   const { data, isLoading } = useGetData({
-    endpoint: "/admin/services",
+    endpoint: "/services",
     config: {
       headers,
     },
@@ -182,7 +224,7 @@ const StepOne = ({
               key={item?.id}
               label={item.name}
               onChange={handleChange}
-              defaultChecked={defValues["service_id"] === item.id}
+              checked={defValues["service_id"] == item.id}
             />
           ))}
         </div>
@@ -193,15 +235,37 @@ const StepOne = ({
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {age.map((item, index) => (
-            <Fragment key={index}>
+            <div key={index} className="space-y-4">
               <RadioInput
-                name={"age"}
-                value={item}
+                value={"1"}
                 label={item}
-                onChange={handleChange}
-                defaultChecked={defValues["age"] === item}
+                type="checkbox"
+                required={false}
+                name={"is_" + item}
+                onChange={() => {
+                  if (defValues["is_" + item] === "1") {
+                    setFieldValue("is_" + item, "0");
+                    setFieldValue(item, "0");
+                  } else {
+                    setFieldValue("is_" + item, "1");
+                  }
+                }}
+                checked={defValues["is_" + item] === "1"}
               />
-            </Fragment>
+
+              {defValues["is_" + item] === "1" && (
+                <Input
+                  step={1}
+                  name={item}
+                  lang="en"
+                  type="number"
+                  value={defValues[item]}
+                  onChange={handleChange}
+                  placeholder={"Number of " + item}
+                  required
+                />
+              )}
+            </div>
           ))}
         </div>
       </div>
@@ -219,7 +283,7 @@ const StepTow = ({
   const headers = createHeaders();
 
   const { data, isLoading } = useGetData({
-    endpoint: "/admin/cuisines",
+    endpoint: "/cuisines",
     config: {
       headers,
     },
@@ -247,7 +311,7 @@ const StepTow = ({
               key={item?.id}
               label={item.name}
               onChange={handleChange}
-              defaultChecked={defValues["cuisine_id"] === item.id}
+              checked={defValues["cuisine_id"] == item.id}
             />
           ))}
         </div>
@@ -272,22 +336,61 @@ const StepTree = ({
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {meals.map((item, index) => (
-            <RadioInput
-              key={index}
-              name={"meal"}
-              value={item}
-              label={item}
-              onChange={handleChange}
-              defaultChecked={defValues["meal"] === item}
-            />
+            <div className="space-y-4" key={index}>
+              <RadioInput
+                type="checkbox"
+                name={item}
+                value={"1"}
+                label={item}
+                required={false}
+                checked={defValues[item] === "1"}
+                onChange={() => {
+                  if (defValues[item] === "1") {
+                    setFieldValue(item, "0");
+                  } else {
+                    setFieldValue(item, "1");
+                    setFieldValue(item + "_status", null);
+                  }
+                }}
+              />
+
+              {defValues[item] === "1" && (
+                <div className="space-y-2 px-4">
+                  <RadioInput
+                    name={item + "_status"}
+                    value={"1"}
+                    label={"Ready to eat"}
+                    required={false}
+                    checked={defValues[item + "_status"] === "1"}
+                    onChange={handleChange}
+                  />
+
+                  <RadioInput
+                    name={item + "_status"}
+                    value={"0"}
+                    label={"Dining experience"}
+                    required={false}
+                    checked={defValues[item + "_status"] === "0"}
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
 
       <div className="space-y-3">
-        <h2 className="title-md">Service Day</h2>
+        <h2 className="title-md">Service Date</h2>
 
-        <div className="col-span-full">
+        <div className="space-y-2 flex-1">
+          <label
+            className="title-sm text-muted-foreground block"
+            htmlFor="date"
+          >
+            Day
+          </label>
+
           <DatePicker
             value={defValues["day"]}
             onChange={(value) => setFieldValue("day", value)}
@@ -296,6 +399,44 @@ const StepTree = ({
               "w-full h-auto py-3 font-semibold border-[3px] rounded-xl border-gray-200 text-sm"
             }
           />
+        </div>
+
+        <div className="flex gap-4 items-center flex-wrap">
+          <div className="space-y-2 flex-1 max-w-56">
+            <label
+              className="title-sm text-muted-foreground block"
+              htmlFor="from_time"
+            >
+              From
+            </label>
+
+            <Input
+              type="time"
+              id={"from_time"}
+              name={"from_time"}
+              required
+              value={defValues["from_time"]}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="space-y-2 flex-1 max-w-56">
+            <label
+              className="title-sm text-muted-foreground block"
+              htmlFor="to_time"
+            >
+              To
+            </label>
+
+            <Input
+              type="time"
+              id={"to_time"}
+              name={"to_time"}
+              required
+              value={defValues["to_time"]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -312,7 +453,7 @@ const StepFour = ({
   const headers = createHeaders();
 
   const { data, isLoading } = useGetData({
-    endpoint: "/admin/packages",
+    endpoint: "/packages",
     config: {
       headers,
     },
@@ -335,7 +476,7 @@ const StepFour = ({
               key={item?.id}
               label={item.name}
               onChange={handleChange}
-              defaultChecked={defValues["package_id"] === item.id}
+              checked={defValues["package_id"] == item.id}
             />
           ))}
         </div>
@@ -364,30 +505,34 @@ const StepFive = ({
         </p>
       </div>
 
-      <div className="space-y-3">
-        <div className="space-y-2">
-          <label className="title-sm mb-2 block">Additional service</label>
+      <div className="space-y-2">
+        <label className="title-sm mb-2 block">Additional service</label>
 
-          <Input
-            name={"addition_service"}
-            required
-            value={defValues["addition_service"]}
-            onChange={handleChange}
-          />
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {addition_services?.map((item) => (
+            <RadioInput
+              name={"addition_service"}
+              value={item.value}
+              key={item?.value}
+              label={item.label}
+              onChange={handleChange}
+              checked={defValues["addition_service"] == item.value}
+            />
+          ))}
         </div>
+      </div>
 
-        <div className="space-y-2">
-          <label className="title-sm mb-2 block">
-            Add preferred services or additional options you would personally
-            like to acquire (Optional)
-          </label>
+      <div className="space-y-2">
+        <label className="title-sm mb-2 block">
+          Add preferred services or additional options you would personally like
+          to acquire (Optional)
+        </label>
 
-          <Textarea
-            name={"preferred_services"}
-            value={defValues["preferred_services"]}
-            onChange={handleChange}
-          />
-        </div>
+        <Textarea
+          name={"details"}
+          value={defValues["details"]}
+          onChange={handleChange}
+        />
       </div>
     </div>
   );

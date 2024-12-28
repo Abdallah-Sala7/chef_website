@@ -24,11 +24,7 @@ const OrderPage = () => {
       </div>
 
       <div className="container section-style">
-        <OrderTabs tabsLength={isLoggedIn ? 5 : 6} />
-
-        <div className="">
-          <Form />
-        </div>
+        <Form />
       </div>
     </section>
   );
