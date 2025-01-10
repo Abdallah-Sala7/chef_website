@@ -23,14 +23,14 @@ export function shortenString(str: string, len: number) {
   return `${shortened.slice(0, lastSpaceIndex)}...`;
 }
 
-export function formatCurrency(value: number, locale = "ar-SA") {
+export function formatCurrency(value: number, locale = "en") {
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "SAR",
   }).format(value);
 }
 
-export function formatDate(date: string, locale = "ar-SA") {
+export function formatDate(date: string, locale = "en") {
   return new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "long",

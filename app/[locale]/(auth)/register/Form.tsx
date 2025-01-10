@@ -25,6 +25,7 @@ const RegisterForm = ({
           type="text"
           id="name"
           name="name"
+          value={values.name}
           onChange={handleChange}
           required
         />
@@ -41,6 +42,7 @@ const RegisterForm = ({
           type="email"
           id="email"
           name="email"
+          value={values.email}
           onChange={handleChange}
           required
         />
@@ -56,6 +58,7 @@ const RegisterForm = ({
           type="tel"
           id="phone"
           name="phone"
+          value={values.phone}
           onChange={handleChange}
           required
         />
@@ -67,7 +70,12 @@ const RegisterForm = ({
           Password
         </label>
 
-        <PasswordInput name="password" onChange={handleChange} required />
+        <PasswordInput
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+          required
+        />
         {errors.password && <p className="form-error">{errors.password}</p>}
       </div>
 
@@ -78,6 +86,7 @@ const RegisterForm = ({
 
         <PasswordInput
           name="password_confirmation"
+          value={values.password_confirmation}
           onChange={handleChange}
           required
         />

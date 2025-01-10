@@ -1,6 +1,7 @@
 type Status =
   | "created"
   | "new"
+  | "open"
   | "completed"
   | "cancelled"
   | "closed"
@@ -30,6 +31,7 @@ export default function Status({
   const classes: Record<Status, string> = {
     created: "bg-sky-500/10 text-sky-600",
     new: "bg-primary/10 text-primary",
+    open: "bg-primary/10 text-primary",
     completed: "bg-green-500/10 text-green-600",
     cancelled: "bg-gray-500/10 text-gray-600",
     closed: "bg-red-500/10 text-red-600",
@@ -52,7 +54,7 @@ export default function Status({
 
   return (
     <p
-      className={`py-2 px-6 rounded-lg capitalize text-center w-fit  ${classes[status]} ${
+      className={`py-2 px-6 rounded-md text-sm capitalize text-center w-fit  ${classes[status]} ${
         className || ""
       }`}
     >

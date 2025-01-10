@@ -20,9 +20,9 @@ import { loginAction } from "@/server/login";
 const age = ["children", "adults", "teens"];
 const meals = ["breakfast", "lunch", "dinner"];
 const addition_services = [
-  { value: 0, label: "waiter" },
-  { value: 1, label: "bartender" },
-  { value: 2, label: "other" },
+  { value: 1, label: "waiter" },
+  { value: 2, label: "bartender" },
+  { value: 3, label: "other" },
 ];
 
 const Form = () => {
@@ -40,7 +40,6 @@ const Form = () => {
       initialValues: {
         service_id: "",
         package_id: "",
-        addition_service: "1",
         day: "",
         state: "1",
       },
@@ -54,10 +53,9 @@ const Form = () => {
         const res = (await mutateAsync(values)) as any;
 
         if (res.status === "fail") {
-          setErrors(res.data);
+          setErrors(res?.message);
           toast.error(res.message || "An error occurred while creating order");
         } else if (res.status === "success") {
-          console.log(res);
           if (res?.data?.token) {
             loginAction(res?.data?.token);
           } else {
@@ -339,38 +337,38 @@ const StepTree = ({
             <div className="space-y-4" key={index}>
               <RadioInput
                 type="checkbox"
-                name={item}
+                name={`is_${item}`}
                 value={"1"}
                 label={item}
                 required={false}
-                checked={defValues[item] === "1"}
+                checked={defValues[`is_${item}`] === "1"}
                 onChange={() => {
-                  if (defValues[item] === "1") {
-                    setFieldValue(item, "0");
+                  if (defValues[`is_${item}`] === "1") {
+                    setFieldValue(`is_${item}`, "0");
+                    setFieldValue(item, null);
                   } else {
-                    setFieldValue(item, "1");
-                    setFieldValue(item + "_status", null);
+                    setFieldValue(`is_${item}`, "1");
                   }
                 }}
               />
 
-              {defValues[item] === "1" && (
+              {defValues[`is_${item}`] === "1" && (
                 <div className="space-y-2 px-4">
                   <RadioInput
-                    name={item + "_status"}
+                    name={item}
                     value={"1"}
                     label={"Ready to eat"}
                     required={false}
-                    checked={defValues[item + "_status"] === "1"}
+                    checked={defValues[item] === "1"}
                     onChange={handleChange}
                   />
 
                   <RadioInput
-                    name={item + "_status"}
+                    name={item}
                     value={"0"}
                     label={"Dining experience"}
                     required={false}
-                    checked={defValues[item + "_status"] === "0"}
+                    checked={defValues[item] === "0"}
                     onChange={handleChange}
                   />
                 </div>

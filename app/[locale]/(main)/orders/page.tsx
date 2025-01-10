@@ -1,3 +1,5 @@
+import OrderCard from "@/components/common/OrderCard";
+import { IOrder } from "@/interfaces/order";
 import { createHeaders } from "@/utils/createHeaders";
 import { getData } from "@/utils/request-server";
 import { cookies } from "next/headers";
@@ -13,14 +15,20 @@ const page = async () => {
     },
   });
 
-  console.log(data);
+  const orders = data?.status === "success" ? (data?.data as IOrder[]) : [];
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Requests</h1>
+    <section className="section-style">
+      <div className="container">
+        <h2 className="title font-bold mb-10">Orders</h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
-    </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {orders?.map((order) => (
+            <OrderCard key={order.id} order={order} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

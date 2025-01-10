@@ -6,111 +6,115 @@ import {
   SaladIcon,
   UserIcon,
   UsersIcon,
-  XIcon,
 } from "lucide-react";
 import Status from "./Status";
 import { Button } from "../ui/button";
+import { IOrder } from "@/interfaces/order";
+import { formatDate } from "@/lib/utils";
 
-const OrderCard = ({
-  status,
-  cuisine,
-  name,
-  date,
-  meal,
-  location,
-}: {
-  status: "new" | "processing" | "paid" | "cancelled";
-  cuisine: string;
-  name: string;
-  date: string;
-  meal: string;
-  location: string;
-}) => {
+const OrderCard = ({ order }: { order: IOrder }) => {
   return (
     <Card className="py-0 px-0 flex flex-col">
-      <div className="p-4 flex items-center border-b">
-        <div className="flex-1 max-w-28 flex justify-start">
-          <Status status={status} />
+      <div className="py-3 px-4 flex items-center border-b">
+        <div className="flex-1 flex justify-start">
+          <Status status={order?.state} />
         </div>
 
-        <div className="flex-1 flex justify-center text-center">
-          <p className="font-semibold">{cuisine}</p>
-        </div>
+        {/* <div className="flex-1 flex justify-center text-center">
+          <p className="font-semibold">#{order?.id}</p>
+        </div> */}
 
-        <div className="flex-1 max-w-28 flex justify-end">
-          <button
-            className="text-gray-600 w-10 h-10 flex justify-center items-center rounded-md hover:bg-gray-200/20"
-            type="button"
-          >
-            <XIcon size={24} />
-          </button>
+        <div className="flex-1 flex justify-end">
+          <p className="text-sm">{formatDate(order?.created_at)}</p>
         </div>
       </div>
 
-      <div className="divide-y divide-gray-200">
-        <div className="grid grid-cols-2 p-3">
+      <div className="divide-y divide-gray-200 border-b">
+        <div className="grid grid-cols-2 py-2 px-3">
           <div className="flex justify-start items-center text-start gap-2">
-            <UserIcon className="shrink-0 w-5 h-5 text-primary" />
+            <UserIcon className="shrink-0 size-5 text-primary" />
 
-            <p>Name</p>
+            <p>Chef</p>
           </div>
 
           <div className="text-end">
-            <p className="text-gray-600">{name}</p>
+            <p className="text-gray-600 text-sm">{order?.chef?.name || "-"}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 p-3">
+        <div className="grid grid-cols-2 py-2 px-3">
           <div className="flex justify-start items-center text-start gap-2">
-            <CalendarIcon className="shrink-0 w-5 h-5 text-primary" />
+            <CalendarIcon className="shrink-0 size-5 text-primary" />
 
             <p>Date</p>
           </div>
 
           <div className="text-end">
-            <p className="text-gray-600">{date}</p>
+            <p className="text-gray-600 text-sm">{formatDate(order?.day)}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 p-3">
+        <div className="grid grid-cols-2 py-2 px-3">
           <div className="flex justify-start items-center text-start gap-2">
-            <SaladIcon className="shrink-0 w-5 h-5 text-primary" />
+            <SaladIcon className="shrink-0 size-5 text-primary" />
 
-            <p>Meal</p>
+            <p>Meals</p>
           </div>
 
           <div className="text-end">
-            <p className="text-gray-600">{meal}</p>
+            <p className="text-gray-600 text-sm">
+              {order?.breakfast_status && (
+                <p>Breakfast {order?.breakfast_status}</p>
+              )}
+              {order?.lunch_status && <p>Lunch {order?.lunch_status}</p>}
+              {order?.dinner_status && <p>Dinner {order?.dinner_status}</p>}
+            </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 p-3">
+        <div className="grid grid-cols-2 py-2 px-3">
           <div className="flex justify-start items-center text-start gap-2">
-            <MapPinIcon className="shrink-0 w-5 h-5 text-primary" />
+            <MapPinIcon className="shrink-0 size-5 text-primary" />
 
-            <p>Location</p>
+            <p>Cuisine</p>
           </div>
 
           <div className="text-end">
-            <p className="text-gray-600">{location}</p>
+            <p className="text-gray-600 text-sm">{order?.cuisine?.name}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 p-3">
+        <div className="grid grid-cols-2 py-2 px-3">
           <div className="flex justify-start items-center text-start gap-2">
-            <UsersIcon className="shrink-0 w-5 h-5 text-primary" />
+            <MapPinIcon className="shrink-0 size-5 text-primary" />
+
+            <p>Addition Service</p>
+          </div>
+
+          <div className="text-end">
+            <p className="text-gray-600 text-sm">{order?.addition_service}</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 py-2 px-3">
+          <div className="flex justify-start items-center text-start gap-2">
+            <UsersIcon className="shrink-0 size-5 text-primary" />
 
             <p>People</p>
           </div>
 
-          <div className="text-end">
-            <p className="text-gray-600">4 Adults 2 teens 1 children</p>
+          <div className="text-end capitalize">
+            <p className="text-gray-600 text-sm">
+              {order?.adult ? `adults ${order?.adult}` : ""}{" "}
+              {order?.teen ? `teens ${order?.teen}` : ""}{" "}
+              {order?.children ? `children ${order?.children}` : ""}
+            </p>
           </div>
         </div>
       </div>
 
-      {status === "new" ? (
-        <div className="px-4 pb-3 pt-1 flex justify-between gap-6">
+      {order.state === "open" ? (
+        <div className="px-4 py-3 flex justify-between gap-4">
           <Button
             type="button"
             className="flex-1 bg-primary/20 text-primary hover:bg-primary/30"
