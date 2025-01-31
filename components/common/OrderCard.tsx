@@ -11,6 +11,7 @@ import Status from "./Status";
 import { Button } from "../ui/button";
 import { IOrder } from "@/interfaces/order";
 import { formatDate } from "@/lib/utils";
+import Link from "next/link";
 
 const OrderCard = ({ order }: { order: IOrder }) => {
   return (
@@ -25,7 +26,7 @@ const OrderCard = ({ order }: { order: IOrder }) => {
         </div> */}
 
         <div className="flex-1 flex justify-end">
-          <p className="text-sm">{formatDate(order?.created_at)}</p>
+          <p className="text-sm">{order?.created_at}</p>
         </div>
       </div>
 
@@ -80,7 +81,7 @@ const OrderCard = ({ order }: { order: IOrder }) => {
           </div>
 
           <div className="text-end">
-            <p className="text-gray-600 text-sm">{order?.cuisine?.name}</p>
+            <p className="text-gray-600 text-sm">{order?.cuisine_name}</p>
           </div>
         </div>
 
@@ -122,9 +123,14 @@ const OrderCard = ({ order }: { order: IOrder }) => {
             <span>Edit Order</span>
           </Button>
 
-          <Button type="button" className="flex-1">
-            <span>View Requests</span>
-          </Button>
+          <Link
+            href={`/orders/${order?.id}`}
+            className="flex-1"
+          >
+            <Button type="button" className="w-full">
+              <span>View Requests</span>
+            </Button>
+          </Link>
         </div>
       ) : (
         <button className="mt-auto w-full flex justify-center items-center gap-1 p-3 font-semibold duration-300 text-primary bg-primary/20 hover:bg-primary/30">

@@ -38,14 +38,16 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {children}
+            <ToastContainer
+              style={{
+                right: "0",
+              }}
+              theme="colored"
+            />
+          </QueryProvider>
         </NextIntlClientProvider>
-        <ToastContainer
-          style={{
-            right: "0",
-          }}
-          theme="colored"
-        />
       </body>
     </html>
   );

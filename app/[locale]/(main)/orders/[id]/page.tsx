@@ -7,13 +7,19 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { cookies } from "next/headers";
-import OrdersContent from "./OrdersContent";
+import PageContent from "./PageContent";
 
-const page = async () => {
+const page = async ({
+  params,
+}: {
+  params: {
+    id: string;
+  };
+}) => {
   const cookieStore = await cookies();
   const headers = createHeaders(cookieStore);
 
-  const endpointOrders = "/user/orders";
+  const endpointOrders = `/user/orders/${params.id}`;
   const propsOrders: FetchData = {
     endpoint: endpointOrders,
     config: { headers },
@@ -28,7 +34,7 @@ const page = async () => {
   return (
     <section className="section-style">
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <OrdersContent />
+        <PageContent />
       </HydrationBoundary>
     </section>
   );

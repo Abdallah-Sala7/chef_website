@@ -20,16 +20,19 @@ export interface IOrder {
   from_time: string;
   to_time: string;
   state: "open" | "new";
-  package: any;
   addition_service: string;
   adult: number;
   children: number;
   teen: number;
   cost: number;
   details: string;
-  service: any;
   chef: any;
-  cuisine: any;
+
+  cuisine_name: string;
+  package_name: string;
+  package_average: string;
+  service_name: string;
+
   breakfast_status: string;
   lunch_status: string;
   dinner_status: string;
