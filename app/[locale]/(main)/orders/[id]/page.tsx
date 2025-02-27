@@ -16,10 +16,11 @@ const page = async ({
     id: string;
   };
 }) => {
+  const { id } = await params;
   const cookieStore = await cookies();
   const headers = createHeaders(cookieStore);
 
-  const endpointOrders = `/user/orders/${params.id}`;
+  const endpointOrders = `/user/orders/${id}`;
   const propsOrders: FetchData = {
     endpoint: endpointOrders,
     config: { headers },

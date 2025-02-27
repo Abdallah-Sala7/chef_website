@@ -5,12 +5,18 @@ import NavLink from "../common/NavLink";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { MenuIcon, XIcon } from "lucide-react";
+import {
+  MenuIcon,
+  MessageCircleMoreIcon,
+  UserCircle2Icon,
+  XIcon,
+} from "lucide-react";
 import { Link } from "@/navigation";
 import { usePathname } from "next/navigation";
 import cookieClient from "js-cookie";
 import { SESSION_NAME } from "@/constant";
 import { logoutAction } from "@/server/logout";
+import { NotificationButton } from "../notifications";
 
 const Header = () => {
   const pathname = usePathname();
@@ -94,14 +100,27 @@ const Header = () => {
               <Button className="font-bold px-8">Log in</Button>
             </Link>
           ) : (
-            <Button
-              className="font-bold px-8"
-              onClick={() => {
-                logoutAction();
-              }}
-            >
-              Log out
-            </Button>
+            <div className="flex items-center gap-1">
+              <Link href={"/messages"}>
+                <button
+                  className="text-gray-500 w-12 h-10 flex justify-center items-center rounded-md hover:bg-gray-50"
+                  type="button"
+                >
+                  <MessageCircleMoreIcon />
+                </button>
+              </Link>
+
+              <NotificationButton />
+
+              <Link href={"/profile"}>
+                <button
+                  className="text-gray-500 w-12 h-10 flex justify-center items-center rounded-md hover:bg-gray-50"
+                  type="button"
+                >
+                  <UserCircle2Icon />
+                </button>
+              </Link>
+            </div>
           )}
 
           <Button
