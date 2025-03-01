@@ -9,13 +9,7 @@ import {
 import { cookies } from "next/headers";
 import PageContent from "./PageContent";
 
-const page = async ({
-  params,
-}: {
-  params: {
-    id: string;
-  };
-}) => {
+const page = async ({ params }: { params: any }) => {
   const { id } = await params;
   const cookieStore = await cookies();
   const headers = createHeaders(cookieStore);

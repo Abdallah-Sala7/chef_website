@@ -30,7 +30,15 @@ const PageContent = () => {
     config: { headers },
   });
 
+  const { data: offersData } = useGetData({
+    endpoint: offerEndpoint,
+    config: { headers },
+  });
+
   const order = data?.status === "success" ? (data?.data as IOrder) : null;
+
+  console.log(offersData);
+  
 
   if (isLoading) return <LoadingPage />;
 
