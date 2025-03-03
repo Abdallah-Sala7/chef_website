@@ -101,7 +101,7 @@ const Header = () => {
             </Link>
           ) : (
             <div className="flex items-center gap-1">
-              <Link href={"/messages"}>
+              <Link href={"/chat"}>
                 <button
                   className="text-gray-500 w-12 h-10 flex justify-center items-center rounded-md hover:bg-gray-50"
                   type="button"

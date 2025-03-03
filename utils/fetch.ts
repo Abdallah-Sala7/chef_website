@@ -24,7 +24,7 @@ export interface FetchRequestConfig extends FetchInstanceConfig {
 type SuccessResponse<T> = {
   status: "success";
   code: number;
-  data: T;
+  data: any;
 };
 
 type FailResponse<K = unknown> = {
