@@ -2,7 +2,7 @@
 
 import Card from "@/components/common/Card";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/navigation";
+import Link from "next/link";
 import { useFormik } from "formik";
 import { postData } from "@/utils/request";
 import { Loader2Icon } from "lucide-react";

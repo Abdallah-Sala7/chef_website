@@ -11,7 +11,7 @@ import {
   UserCircle2Icon,
   XIcon,
 } from "lucide-react";
-import { Link } from "@/navigation";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import cookieClient from "js-cookie";
 import { SESSION_NAME } from "@/constant";

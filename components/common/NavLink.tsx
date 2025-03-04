@@ -1,7 +1,6 @@
 "use client";
 
-import { Link } from "@/navigation";
-import { useLocale } from "next-intl";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NavLink = ({
@@ -13,9 +12,8 @@ const NavLink = ({
   children: React.ReactNode;
 }) => {
   const pathname = usePathname();
-  const locale = useLocale();
-  const isActive =
-    pathname === `/${locale}${href}` || pathname === `${href}${locale}`;
+
+  const isActive = pathname === `/${href}` || pathname === `${href}`;
 
   return (
     <Link

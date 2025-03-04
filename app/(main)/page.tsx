@@ -3,7 +3,7 @@ import CustomImage from "@/components/common/Image";
 import ImpactCard from "@/components/common/ImpactCard";
 import SpecializeCard from "@/components/common/SpecializationCard";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/navigation";
+import Link from "next/link";
 import {
   ChefHatIcon,
   ConciergeBellIcon,

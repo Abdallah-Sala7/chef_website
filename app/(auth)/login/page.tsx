@@ -5,7 +5,7 @@ import Input from "@/components/common/Input";
 import PasswordInput from "@/components/common/PasswordInput";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Link } from "@/navigation";
+import Link from "next/link";
 import { loginAction } from "@/server/login";
 import { postData } from "@/utils/request";
 import { useFormik } from "formik";
