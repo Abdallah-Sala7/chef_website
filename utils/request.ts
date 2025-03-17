@@ -5,7 +5,7 @@ import cookies from "js-cookie";
 import { FetchInstance } from "./fetch";
 import type { FetchRequestConfig } from "./fetch";
 
-import { COOKIE_NAME, SESSION_NAME } from "@/constant";
+import { BASE_URL, COOKIE_NAME, SESSION_NAME } from "@/constant";
 
 const getLangAndToken = () => {
   const lang = cookies.get(COOKIE_NAME) || "ar";
@@ -16,7 +16,7 @@ const getLangAndToken = () => {
 const { lang, token } = getLangAndToken();
 
 const apiInstance = new FetchInstance({
-  baseURL: "https://api.cheffinder.ae",
+  baseURL: BASE_URL,
   headers: {
     "Accept-Language": lang,
     lang,

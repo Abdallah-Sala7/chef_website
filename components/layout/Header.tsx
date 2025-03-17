@@ -15,8 +15,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import cookieClient from "js-cookie";
 import { SESSION_NAME } from "@/constant";
-import { logoutAction } from "@/server/logout";
 import { NotificationButton } from "../notifications";
+import AccountOptions from "../common/NavbarOptions";
 
 const Header = () => {
   const pathname = usePathname();
@@ -112,14 +112,7 @@ const Header = () => {
 
               <NotificationButton />
 
-              <Link href={"/profile"}>
-                <button
-                  className="text-gray-500 w-12 h-10 flex justify-center items-center rounded-md hover:bg-gray-50"
-                  type="button"
-                >
-                  <UserCircle2Icon />
-                </button>
-              </Link>
+              <AccountOptions />
             </div>
           )}
 

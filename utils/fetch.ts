@@ -67,11 +67,13 @@ export class FetchInstance {
     } = config;
 
     const mergedHeaders = {
-      "Content-Type":
-        body instanceof FormData ? "multipart/form-data" : "application/json",
       ...this.headers, // Instance-level headers
       ...requestHeaders, // Request-specific headers (can override instance headers)
     };
+
+    if (!(body instanceof FormData)) {
+      mergedHeaders["Content-Type"] = "application/json";
+    }
 
     try {
       const response = await fetch(this.buildURL(fullURL, queryParams), {

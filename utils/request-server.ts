@@ -1,10 +1,11 @@
 "use server";
 
+import { BASE_URL } from "@/constant";
 import { FetchInstance } from "./fetch";
 import type { FetchRequestConfig } from "./fetch";
 
 const apiInstance = new FetchInstance({
-  baseURL: "https://api.cheffinder.ae",
+  baseURL: BASE_URL,
 });
 
 type FetchData = {

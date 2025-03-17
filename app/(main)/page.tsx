@@ -114,7 +114,7 @@ const Home = () => {
             alt="Chef finder home"
             fill
             sizes="100vw"
-            objectFit="cover"
+            unoptimized
             quality={100}
           />
         </div>

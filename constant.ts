@@ -2,6 +2,9 @@ const COOKIE_NAME = "NEXT_LOCALE";
 const SESSION_NAME = "NEXT_SESSION";
 const EMAIL_ADDRESS = "EMAIL_ADDRESS";
 const PASSWORD_RESET = "PASSWORD_RESET";
+const USER_SESSION = "USER_SESSION";
+
+
 
 const AUTH_ROUTES = [
   "/sign-in",
@@ -26,7 +29,7 @@ const PUBLIC_ROUTES = [
 ];
 const DEFAULT_LOGIN_REDIRECT = "/";
 const DEFAULT_LOGOUT_REDIRECT = "/";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = "https://cheffinder.net";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 enum RequestType {
@@ -48,5 +51,6 @@ export {
   DEFAULT_LOGOUT_REDIRECT,
   BASE_URL,
   API_URL,
+  USER_SESSION,
   RequestType,
 };

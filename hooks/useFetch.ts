@@ -3,7 +3,13 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import type { FetchRequestConfig, RequestData } from "../utils/fetch";
-import { deleteData, getData, patchData, postData, putData } from "../utils/request";
+import {
+  deleteData,
+  getData,
+  patchData,
+  postData,
+  putData,
+} from "../utils/request";
 
 type FetchData = {
   endpoint: string;
@@ -20,7 +26,10 @@ export const useGetData = <T, K = unknown>({ endpoint, config }: FetchData) => {
 };
 
 // POST
-export const usePostData = <T, K = unknown>({ endpoint, config }: FetchData) => {
+export const usePostData = <T, K = unknown>({
+  endpoint,
+  config,
+}: FetchData) => {
   const { data, mutateAsync, mutate, status, isSuccess } = useMutation({
     mutationKey: [endpoint, config],
     mutationFn: (data: RequestData) =>
@@ -36,25 +45,34 @@ export const usePostData = <T, K = unknown>({ endpoint, config }: FetchData) => 
 export const usePutData = <T, K = unknown>({ endpoint, config }: FetchData) => {
   const { data, mutateAsync, mutate, status, isSuccess } = useMutation({
     mutationKey: [endpoint, config],
-    mutationFn: (data: RequestData) => putData<T, K>({ endpoint, config: { body: data, ...config } }),
+    mutationFn: (data: RequestData) =>
+      putData<T, K>({ endpoint, config: { body: data, ...config } }),
   });
   return { data, mutateAsync, mutate, status, isSuccess };
 };
 
 // PATCH
-export const usePatchData = <T, K = unknown>({ endpoint, config }: FetchData) => {
+export const usePatchData = <T, K = unknown>({
+  endpoint,
+  config,
+}: FetchData) => {
   const { data, mutateAsync, mutate, status, isSuccess } = useMutation({
     mutationKey: [endpoint, config],
-    mutationFn: (data: RequestData) => patchData<T, K>({ endpoint, config: { body: data, ...config } }),
+    mutationFn: (data: RequestData) =>
+      patchData<T, K>({ endpoint, config: { body: data, ...config } }),
   });
   return { data, mutateAsync, mutate, status, isSuccess };
 };
 
 // DELETE
-export const useDeleteData = <T, K = unknown>({ endpoint, config }: FetchData) => {
+export const useDeleteData = <T, K = unknown>({
+  endpoint,
+  config,
+}: FetchData) => {
   const { data, mutateAsync, mutate, status, isSuccess } = useMutation({
     mutationKey: [endpoint, config],
-    mutationFn: (data: RequestData) => deleteData<T, K>({ endpoint, config: { body: data, ...config } }),
+    mutationFn: (data: RequestData) =>
+      deleteData<T, K>({ endpoint, config: { body: data, ...config } }),
   });
   return { data, mutateAsync, mutate, status, isSuccess };
 };

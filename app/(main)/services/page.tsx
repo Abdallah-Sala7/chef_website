@@ -1,6 +1,7 @@
 import ServiceCard from "@/components/common/ServiceCard";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const services = [
@@ -55,7 +56,9 @@ const ServicesPage = () => {
               </h2>
             </div>
 
-            <Button className="px-8 font-semibold">Book Now</Button>
+            <Link href={"/new-order"}>
+              <Button className="px-8 font-semibold">Book Now</Button>
+            </Link>
           </div>
         </div>
 

@@ -5,10 +5,12 @@ import { useEffect } from "react";
 import { ChatMessage } from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import Image from "next/image";
+import { getUserSession } from "@/utils/userSession";
 
 const page = () => {
-  const endpoint =
-    "/user/messages?sender_id=1&sender_type=user&receiver_id=1&receiver_type=admin";
+  const user = getUserSession();
+
+  const endpoint = `/user/messages?sender_id=${user?.id}&sender_type=${user?.role}&receiver_id=1&receiver_type=admin`;
 
   const { data, isLoading, refetch } = useGetData({
     endpoint,

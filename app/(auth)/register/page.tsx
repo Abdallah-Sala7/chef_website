@@ -40,7 +40,7 @@ const RegisterPage = () => {
         } else if (res.status === "success") {
           const token = res?.data?.token || "";
           toast.success("Account created successfully");
-          await loginAction(token);
+          await loginAction(token, false, JSON.stringify(res?.data));
           window.location.href = "/";
         }
       },

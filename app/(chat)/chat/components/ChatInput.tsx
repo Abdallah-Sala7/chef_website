@@ -2,11 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { usePostData } from "@/hooks/useFetch";
+import { getUserSession } from "@/utils/userSession";
 import { Send } from "lucide-react";
 import { useState } from "react";
 
 export function ChatInput({ refetch }: { refetch: () => void }) {
+  const user = getUserSession();
   const [message, setMessage] = useState("");
+
   const { mutateAsync, status } = usePostData({
     endpoint: `/user/message`,
   });
@@ -15,10 +18,10 @@ export function ChatInput({ refetch }: { refetch: () => void }) {
     e.preventDefault();
 
     await mutateAsync({
-      sender_id: 1,
       receiver_id: 1,
-      sender_type: "user",
       receiver_type: "admin",
+      sender_id: user?.id,
+      sender_type: user?.role,
       content: message,
     });
 

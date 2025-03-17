@@ -33,7 +33,7 @@ const LoginPage = () => {
       } else if (res.status === "success") {
         const token = res?.data?.token || "";
         toast.success("Logged in successfully");
-        await loginAction(token);
+        await loginAction(token, false, JSON.stringify(res?.data));
         window.location.href = "/";
       }
     },

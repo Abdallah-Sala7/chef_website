@@ -57,7 +57,7 @@ const Form = () => {
           toast.error(res.message || "An error occurred while creating order");
         } else if (res.status === "success") {
           if (res?.data?.token) {
-            loginAction(res?.data?.token);
+            loginAction(res?.data?.token, false, JSON.stringify(res?.data));
           } else {
             toast.success("Order created successfully");
             router.push(`/orders`);
@@ -168,7 +168,7 @@ const RadioInput = ({
       <label
         className={cn(
           "flex items-center justify-center w-full h-full cursor-pointer py-3 px-4 text-sm rounded-xl border-[3px] border-gray-200 text-center font-semibold lg:px-6",
-          "group-has-[input:checked]:border-primary"
+          "group-has-[input:checked]:border-primary capitalize"
         )}
       >
         <input

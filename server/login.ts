@@ -6,12 +6,14 @@ import {
   // DEFAULT_LOGIN_REDIRECT,
   EMAIL_ADDRESS,
   SESSION_NAME,
+  USER_SESSION,
 } from "@/constant";
 import { decodeSession } from "@/utils/session";
 
 export const loginAction = async (
   session: string,
-  remeber: boolean = false
+  remeber: boolean = false,
+  user_session: string
   // callbackUrl?: string | null
 ) => {
   const { exp } = decodeSession(session);
@@ -23,6 +25,15 @@ export const loginAction = async (
     path: "/",
     expires: remeber ? new Date(exp * 1000) : undefined,
     value: session,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+  });
+
+  // if remember is false, set the session cookie to expire to session cookie
+  (await cookieSession).set(USER_SESSION, user_session, {
+    path: "/",
+    expires: remeber ? new Date(exp * 1000) : undefined,
+    value: user_session,
     sameSite: "strict",
     secure: process.env.NODE_ENV === "production",
   });
