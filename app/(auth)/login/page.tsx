@@ -57,15 +57,17 @@ const LoginPage = () => {
           Log in as a customer
         </Link>
 
-        <Link
-          href={"/login"}
+        <a
+          href={"https://chef.cheffinder.ae"}
+          target="_blank"
+          rel="noopener noreferrer"
           className={cn(
             "flex-1 text-center px-4 py-3 font-semibold rounded-e-xl",
             "bg-primary/10 hover:bg-primary/15"
           )}
         >
           Log in as a chef
-        </Link>
+        </a>
       </div>
 
       <form onSubmit={handleSubmit}>

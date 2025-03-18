@@ -91,6 +91,17 @@ const Header = () => {
             <li>
               <NavLink href="/contact-us">Contact us</NavLink>
             </li>
+
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://drive.google.com/file/d/1Ueb11DkBU3WTn6EAXg2pH5nG1apJfFuA/view"
+                className="py-0.5 text-lg text-primary relative after:absolute after:h-px after:left-1/2 after:-translate-x-1/2 after:bg-primary/70 after:top-full after:w-full"
+              >
+                Guidance Book
+              </a>
+            </li>
           </ul>
         </div>
 
